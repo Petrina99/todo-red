@@ -6,10 +6,10 @@ import { Switch, Route } from 'react-router-dom';
 export const Routing: React.FC = () => {
   return (
     <Switch>
-      <Route path='/'>
+      <Route exact path='/'>
         <WelcomeView />
       </Route>
-      <Route path='/tasks'>
+      <Route exact path='/tasks'>
         <TaskView />
       </Route>
     </Switch>
