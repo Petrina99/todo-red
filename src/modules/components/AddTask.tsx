@@ -15,7 +15,7 @@ export const AddTask: React.FC = () => {
 
   const { tasks } = useSelector((state:AppState) => state.taskReducer);
   const dispatch = useDispatch();
-  
+
   const id = tasks.length 
     ? tasks.sort((a,b) => a.id - b.id)[tasks.length - 1].id + 1 
     : 1;
@@ -44,7 +44,7 @@ export const AddTask: React.FC = () => {
        {errors.input && (
           <p>{errors.input.message}</p>
         )}
-      <button type='submit' />
+      <button type='submit'>Add</button>
     </form>
   )
 }

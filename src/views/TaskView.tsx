@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { AddTask, TaskList } from 'modules/components';
 export const TaskView: React.FC = () => {
   return (
     <div>
-      <p>This is where the tasks will go</p>
+      <AddTask />
+      <TaskList />
     </div>
   );
 };
