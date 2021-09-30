@@ -30,47 +30,29 @@ export const TaskList: React.FC = () => {
     }
   }
 
-  const onFinished = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { id, content } = e.currentTarget.dataset;
-    
-    if (id && content) {
-      dispatch(TaskAction.finished({ content: content, id: parseInt(id), finished: true }));
-    }
-  }
-
   return (
-    <div>
-      <ul>
-        {tasks
-          .sort((a,b) => a.id - b.id)
-          .map((task) => (
-            <div key={task.id}>
-              <strong>{task.id}</strong>
-              <span 
-                data-id={task.id}
-                contentEditable
-                onBlur={onEdit}
-              >
-                {task.content}
-              </span>
-              <button 
-                type='button'
-                onClick={onRemove}
-                data-id={task.id}
-              >
-                &times;
-              </button>
-              <button
-                type='button'
-                onClick={onFinished}
-                data-id={task.id}
-                data-content={task.content}
-              >
-                <p>Finish</p>
-              </button>
-            </div>
-          ))}
-      </ul>
-    </div>
+    <>
+      {tasks
+        .sort((a,b) => a.id - b.id)
+        .map((task) => (
+          <div key={task.id}>
+            <strong>{task.id}</strong>
+            <span 
+              data-id={task.id}
+              contentEditable
+              onBlur={onEdit}
+            >
+              {task.content}
+            </span>
+            <button 
+              type='button'
+              onClick={onRemove}
+              data-id={task.id}
+            >
+              &times;
+            </button>
+          </div>
+        ))}
+    </>
   )
 }

@@ -33,14 +33,6 @@ export const TaskReducer = (
         ...state,
         tasks: state.tasks.filter((task) => task.id !== action.payload.id),
       };
-    case 'task/finished':
-      return {
-        ...state,
-        tasks: [
-          ...state.tasks.filter((task) => task.id !== action.payload.id),
-          action.payload,
-        ],
-      };
     case 'task/reset':
       return INITIAL_STATE;
     default:
