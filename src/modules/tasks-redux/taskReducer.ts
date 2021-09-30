@@ -24,16 +24,22 @@ export const TaskReducer = (
       return {
         ...state,
         tasks: [
-          ...state.tasks.filter((item) => item.id !== action.payload.id),
+          ...state.tasks.filter((task) => task.id !== action.payload.id),
           action.payload,
         ],
       };
     case 'task/remove':
       return {
         ...state,
-        tasks: state.tasks.filter(
-          (topping) => topping.id !== action.payload.id,
-        ),
+        tasks: state.tasks.filter((task) => task.id !== action.payload.id),
+      };
+    case 'task/finished':
+      return {
+        ...state,
+        tasks: [
+          ...state.tasks.filter((task) => task.id !== action.payload.id),
+          action.payload,
+        ],
       };
     case 'task/reset':
       return INITIAL_STATE;
