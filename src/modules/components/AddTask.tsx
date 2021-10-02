@@ -1,18 +1,13 @@
-import React from 'react';
-
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { TaskAction } from 'modules/tasks-redux';
 
 import { AppState } from 'modules/redux-store';
 
-type FormValues = {
-  input: string;
-}
-
 export const AddTask: React.FC = () => {
 
+  const [input, setInput] = useState('');
   const { tasks } = useSelector((state:AppState) => state.taskReducer);
   const dispatch = useDispatch();
 
@@ -20,30 +15,30 @@ export const AddTask: React.FC = () => {
     ? tasks.sort((a,b) => a.id - b.id)[tasks.length - 1].id + 1 
     : 1;
 
-  const { 
-    register, 
-    handleSubmit,
-    formState: { errors },
-   } = useForm<FormValues>();
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
 
-  const onSubmit = (data: FormValues) => {
+    setInput(value);
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     dispatch(
-      TaskAction.add({ content: data.input, id: id, finished: false }),
+      TaskAction.add({ content: input, id: id, finished: false }),
       );
+    setInput('');
   }
 
   return(
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit}>
       <h3>Add tasks</h3>
       <input 
         type='text' 
-        {...register('input', {
-          required: 'This field is required.',
-        })}
+        required
+        value={input}
+        onChange={handleInputChange}
       />
-       {errors.input && (
-          <p>{errors.input.message}</p>
-        )}
       <button type='submit'>Add</button>
     </form>
   )
