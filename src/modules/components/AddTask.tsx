@@ -5,6 +5,8 @@ import { TaskAction } from 'modules/tasks-redux';
 
 import { AppState } from 'modules/redux-store';
 
+import style from './styles/addTask.module.css';
+
 export const AddTask: React.FC = () => {
 
   const [input, setInput] = useState('');
@@ -31,15 +33,19 @@ export const AddTask: React.FC = () => {
   }
 
   return(
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={style.addTaskForm}>
       <h3>Add tasks</h3>
-      <input 
-        type='text' 
-        required
-        value={input}
-        onChange={handleInputChange}
-      />
-      <button type='submit'>Add</button>
+      <div className={style.inputDiv}>
+        <input 
+          type='text' 
+          required
+          value={input}
+          onChange={handleInputChange}
+          placeholder='Write your tasks here'
+          maxLength={40}
+        />
+        <button type='submit' className={style.btn}>Add</button>
+      </div>
     </form>
   )
 }
